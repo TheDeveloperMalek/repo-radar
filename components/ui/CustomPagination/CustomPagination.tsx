@@ -15,7 +15,7 @@ export function CustomPagination({
     <Pagination className={className}>
       <PaginationContent>
         <PaginationItems
-          pathname={pathNameWithNoPagination}
+          pathname={`${pathNameWithNoPagination}`}
           initialActive={initialActive}
           count={count}
         />
