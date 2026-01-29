@@ -1,0 +1,10 @@
+@reference "tailwindcss";
+
+.link {
+    @apply capitalize text-sm border-b-2 border-b-transparent transition-all
+}
+
+
+.active , .link:hover {
+    @apply text-sky-600  border-b-sky-600
+}

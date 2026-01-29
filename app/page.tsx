@@ -1,65 +1,91 @@
+"use client";
+import { Input } from "@/components/ui/Input/input";
+import classes from "./home.module.css";
+import { Button } from "@/components/ui/Button/button";
+import { FaSearch } from "react-icons/fa";
+import FloatingLines from "@/components/FloatingLines";
+import { toast } from "sonner";
+import { useRef, useState } from "react";
+import { GitHubService } from "@/services/github.service";
+import { Spinner } from "@/components/ui/spinner";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/config/constants";
+import SplitText from "@/components/SplitText";
 import Image from "next/image";
+import RepoRadarLogo from "@/app/favicon.ico";
 
 export default function Home() {
+  const [searching, setSearching] = useState<boolean>(false);
+  const usernameInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+
+  const handleClick = async () => {
+    try {
+      setSearching(true);
+      const usernameValue = usernameInputRef.current?.value;
+      if (!usernameValue) {
+        toast.error("Please enter GitHub username");
+        return;
+      }
+      const usernameWithoutSpaces = usernameValue.replaceAll(" ", "");
+      const userExists = await GitHubService.getUserDetails(
+        usernameWithoutSpaces,
+      );
+      if (!userExists) {
+        toast.error("The Github username does not exists");
+        return;
+      }
+      toast.success("GitHub user found. Loading profile …");
+      router.push(`/${usernameWithoutSpaces}/${ROUTES.dashboard}`);
+    } catch (e) {
+      console.error(e);
+      toast.error("Something went wrong while verifying the username.");
+    } finally {
+      setSearching(false);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <div className={classes.container}>
+        <div className={classes.float}>
+          <FloatingLines
+            enabledWaves={["top", "middle", "bottom"]}
+            linesGradient={["30c5d2", "471069"]}
+            lineCount={7}
+            lineDistance={5}
+            bendRadius={5}
+            bendStrength={-0.5}
+            interactive={true}
+            parallax={true}
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <Image width={50} height={50} src={RepoRadarLogo} alt="Logo" />
+        <div className={classes.title}>
+          <SplitText
+            text="RepoRadar"
+            className={classes["app-name"]}
+            delay={50}
+            duration={1.25}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+          />
+          <h3>Clean, Modern Reporting for GitHub User Activity</h3>
         </div>
-      </main>
-    </div>
+        <div className={classes["username-input"]}>
+          <Input
+            placeholder="Enter GitHub Username"
+            name="username"
+            ref={usernameInputRef}
+          />
+          <Button onClick={handleClick} disabled={searching}>
+            {!searching ? <FaSearch /> : <Spinner />}
+          </Button>
+        </div>
+      </div>
+    </>
   );
 }

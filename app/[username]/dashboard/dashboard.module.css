@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.title {
+    @apply text-4xl
+}
+
+.section-title {
+    @apply text-xl mt-4 text-neutral-300 capitalize
+}
+
+.cards-section {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8 gap-8
+}

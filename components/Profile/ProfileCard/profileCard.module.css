@@ -1,0 +1,52 @@
+@reference 'tailwindcss';
+
+.card {
+    @apply bg-inherit text-inherit px-8
+}
+
+.header {
+    @apply flex p-0 gap-5
+}
+
+.image {
+    @apply rounded-full overflow-hidden
+}
+
+.title {
+    @apply text-3xl
+}
+
+.desc {
+    @apply mt-1
+}
+
+.icons-container {
+    @apply flex gap-8
+}
+
+.icon {
+    @apply inline me-2
+}
+
+.content {
+    @apply flex flex-col gap-3 sm:grid sm:grid-cols-3 border-y text-center py-6 
+}
+.content-col {
+    @apply flex flex-col
+}
+
+.content-value {
+    @apply font-bold min-h-7 inline-block
+}
+
+.content-label {
+    @apply text-neutral-500 uppercase
+}
+
+.footer {
+    @apply flex gap-8 p-0 justify-center sm:justify-start
+}
+
+.social-link {
+    @apply hover:text-sky-500
+}

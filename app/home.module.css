@@ -1,0 +1,33 @@
+@reference "tailwindcss";
+
+.container {
+    @apply flex flex-col justify-center items-center py-6 h-screen
+}
+
+.float {
+    @apply w-full h-full absolute
+}
+
+.title {
+    @apply text-center
+}
+
+.title .app-name {
+    @apply text-6xl mb-3 text-sky-500
+}
+
+.title h3 {
+    @apply sm:text-lg md:text-xl text-sky-300
+}
+
+.username-input {
+    @apply mt-6 lg:w-2xl md:w-xl sm:w-sm h-32 flex relative
+}
+
+.username-input input {
+    @apply h-14
+}
+
+.username-input button {
+    @apply absolute h-14 right-0  cursor-pointer rounded-l-none bg-blue-500
+}

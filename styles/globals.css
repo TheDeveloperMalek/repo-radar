@@ -1,0 +1,19 @@
+@import "./variables.css";
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+body {
+  font-family: "inter", Arial, Helvetica, sans-serif;
+  min-height: 100vh
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
