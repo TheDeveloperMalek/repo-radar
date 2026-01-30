@@ -14,18 +14,28 @@ function PinnedRepos({ repos }: { repos: Array<GitHubUserRepo> }) {
           className="custom-spotlight-card"
           spotlightColor="rgba(48, 197, 210, 0.6)"
         >
-          <h1 className="text-sky-500 mb-1 text-xl">{name}</h1>
-          <h3>{PhraseSliceFormatter(description, PHRASE_MAX_LENGTH.long)}</h3>
-          <div className="flex justify-between mt-12 self-end">
-            <span
-              className={clsx(language ? "bg-neutral-800 rounded-xl p-2" : "")}
-            >
-              {language}
-            </span>
-            <span className="flex items-center gap-2">
-              <FaStar className="text-amber-400" />
-              {stargazers_count}
-            </span>
+          <div className="flex flex-col justify-between h-full">
+            <div>
+              <h1 className="text-sky-500 mb-1 text-xl">{name}</h1>
+              <h3>
+                {PhraseSliceFormatter(description, PHRASE_MAX_LENGTH.long)}
+              </h3>
+            </div>
+
+            <div className="flex justify-between mt-12">
+              <span
+                className={clsx(
+                  language ? "bg-neutral-800 rounded-xl p-2" : "",
+                )}
+              >
+                {language}
+              </span>
+
+              <span className="flex items-center gap-2">
+                <FaStar className="text-amber-400" />
+                {stargazers_count}
+              </span>
+            </div>
           </div>
         </SpotlightCard>
       ))}
