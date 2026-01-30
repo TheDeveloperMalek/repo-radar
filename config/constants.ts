@@ -1,7 +1,7 @@
 const ITEMS_PER_PAGE = 9;
 const ROUTE_MAX_DEPTH = 3;
 const PAGINATION_MAX_PILLS = 5;
-const PHRASE_MAX_LENGTH = 30;
+const PHRASE_MAX_LENGTH = { long: 15, short: 10 };
 
 const ROUTES = {
   home: "/",

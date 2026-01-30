@@ -61,7 +61,7 @@ function ReposList({
               <div>
                 <h3>{name}</h3>
                 <p className="text-neutral-500">
-                  {PhraseSliceFormatter(description, PHRASE_MAX_LENGTH)}
+                  {PhraseSliceFormatter(description, PHRASE_MAX_LENGTH.short)}
                 </p>
               </div>
               <div className=" w-full">
