@@ -1,6 +1,8 @@
 const ITEMS_PER_PAGE = 9;
 const ROUTE_MAX_DEPTH = 3;
 const PAGINATION_MAX_PILLS = 5;
+const PHRASE_MAX_LENGTH = 30;
+
 const ROUTES = {
   home: "/",
   dashboard: "/dashboard",
@@ -19,4 +21,5 @@ export {
   ITEMS_PER_PAGE,
   ROUTE_MAX_DEPTH,
   PAGINATION_MAX_PILLS,
+  PHRASE_MAX_LENGTH,
 };

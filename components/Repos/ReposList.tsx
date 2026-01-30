@@ -5,6 +5,8 @@ import Link from "next/link";
 import AnimatedList from "../AnimatedList";
 import { useRouter } from "next/navigation";
 import { GitHubUserRepo } from "@/types/github.types";
+import { PhraseSliceFormatter } from "@/lib/utils";
+import { PHRASE_MAX_LENGTH } from "@/config/constants";
 
 function ReposList({
   gridDisplay,
@@ -58,7 +60,9 @@ function ReposList({
             >
               <div>
                 <h3>{name}</h3>
-                <p className="text-neutral-500">{description}</p>
+                <p className="text-neutral-500">
+                  {PhraseSliceFormatter(description, PHRASE_MAX_LENGTH)}
+                </p>
               </div>
               <div className=" w-full">
                 {language && (

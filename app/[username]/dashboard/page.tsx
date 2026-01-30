@@ -19,13 +19,13 @@ async function DashboardPage({
     },
     {
       header: "Total Stars",
-      statValue: total_followers,
+      statValue: stars,
       iconType: "star",
       footer: "From various projects",
     },
     {
       header: "Total Followers",
-      statValue: stars,
+      statValue: total_followers,
       iconType: "follower",
       footer: "Your community engagement",
     },
